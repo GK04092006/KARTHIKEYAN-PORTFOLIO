@@ -1,0 +1,8 @@
+shots/
+.vercel/
+node_modules/
+.claude/
+karthik/projects-vignesh/
+karthik/years-vignesh/
+karthik/*vignesh*
+karthik/VIGNESH*

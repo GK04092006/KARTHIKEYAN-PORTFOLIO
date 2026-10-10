@@ -1,0 +1,9 @@
+{
+  "name": "karthikeyan-cinematic-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python tools/serve.py 5173",
+    "deploy": "npx vercel --prod"
+  }
+}
