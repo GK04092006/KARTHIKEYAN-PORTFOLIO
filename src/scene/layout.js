@@ -12,13 +12,13 @@
 import { TARGET_RATIO } from './type.js';
 
 export const REF = {
-  wordWidth: 0.9344,     // fraction of viewport width
-  capHeight: 0.5320,     // fraction of viewport height
-  vCentre: 0.5361,       // vertical centre of the cap box
-  legend: { x: 0.8812, y: 0.2678, h: 0.0422 },
-  artist: { x: 0.0150, y: 0.6878, h: 0.0367 },
+  wordWidth: 0.90,       // fraction of viewport width
+  capHeight: 0.36,       // fraction of viewport height (leaves clean room for Hero HUD below)
+  vCentre: 0.41,         // vertical centre of the cap box
+  legend: { x: 0.95, y: 0.21, h: 0.036 },
+  artist: { x: 0.05, y: 0.21, h: 0.036 },
   dotsBR: { x: 0.9844, y: 0.9500 },
-  arrows: { left: 0.0181, right: 0.9750, top: 0.345, bottom: 0.625, count: 5 },
+  arrows: { left: 0.0181, right: 0.9750, top: 0.30, bottom: 0.56, count: 5 },
 };
 
 export function computeLayout(w, h) {
@@ -30,14 +30,11 @@ export function computeLayout(w, h) {
   const byHeight = REF.capHeight * h;
   let capH = Math.min(byWidth, byHeight);
 
-  // On a phone the word is width-bound and ends up short, leaving a dead band of
-  // empty screen. Letting it grow taller there keeps the composition dense
-  // instead of stranding the type in the middle of nowhere.
-  if (portrait) capH = Math.min(byWidth * 1.0, h * 0.30);
+  if (portrait) capH = Math.min(byWidth * 1.0, h * 0.22);
 
   const wordW = capH * TARGET_RATIO;
   const cx = w * 0.5;
-  const vCentre = portrait ? h * 0.50 : h * REF.vCentre;
+  const vCentre = portrait ? h * 0.36 : h * REF.vCentre;
   const capTop = vCentre - capH * 0.5;
   const baseline = vCentre + capH * 0.5;
 
@@ -50,20 +47,15 @@ export function computeLayout(w, h) {
     baseline,
   };
 
-  // The figure stands BEHIND the wordmark, so he is sized to break out of it at
-  // both ends: head and shoulders clear the cap line, legs continue below the
-  // baseline, and the rest of him is glimpsed through the counters. Sized only
-  // to the cap height he would be swallowed whole by the letters.
-  let heroH = capH * 1.55;
-  let feet = baseline + capH * 0.26;
+  let heroH = capH * 1.45;
+  let feet = baseline + capH * 0.22;
 
   if (portrait) {
-    // on a phone the word is width-bound and short, so tying the man to it would
-    // shrink him to a bystander; he is scaled to the viewport instead and the
-    // wordmark crosses his torso
-    heroH = h * 0.54;
-    feet = h * 0.885;
+    heroH = h * 0.44;
+    feet = h * 0.84;
   }
+
+  const chipY = Math.max(82, capTop - (portrait ? 28 : 34));
 
   return {
     w,
@@ -73,17 +65,18 @@ export function computeLayout(w, h) {
     narrow,
     word,
     hero: { h: heroH, cx, feet },
-    // clear of the header band and clear of his head; it renders in front of
-    // the typography, so it stays readable wherever it lands
-    welcomeY: portrait ? (feet - heroH) - h * 0.075 : h * 0.175,
-    legend: portrait
-      ? { x: w * 0.955, y: capTop - h * 0.052, h: 20, alignRight: true }
-      : { x: w * REF.legend.x, y: h * REF.legend.y,
-          h: Math.max(18, h * REF.legend.h) },
-    artist: portrait
-      ? { x: w * 0.045, y: baseline + h * 0.055, h: 19 }
-      : { x: w * REF.artist.x, y: h * REF.artist.y,
-          h: Math.max(16, h * REF.artist.h) },
+    welcomeY: Math.max(76, capTop - (portrait ? 54 : 46)),
+    legend: {
+      x: word.x + word.w,
+      y: chipY,
+      h: Math.max(18, h * REF.legend.h),
+      alignRight: true,
+    },
+    artist: {
+      x: word.x,
+      y: chipY,
+      h: Math.max(18, h * REF.artist.h),
+    },
     ember: { x: 0.5, y: vCentre / h },
   };
 }

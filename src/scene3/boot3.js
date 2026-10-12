@@ -93,25 +93,18 @@ export async function initChrono() {
     for (let i = 0; i < cards.length; i++) {
       const c = L.cards[i];
       const el = cards[i];
-      // The reference's cards are ~8-12% of frame width — faithful, but at
-      // that size the body copy is unreadable on a real screen (it needed a 3x
-      // zoom to read in the poster itself). They are scaled up just enough to
-      // be legible while keeping the measured progression and spacing, so the
-      // composition still reads as the reference.
-      const w = portrait ? c.w : c.w * 1.62;
+      const w = portrait ? c.w : Math.min(c.w * 1.18, 168);
       el.style.width = `${w}px`;
       el.style.left = `${c.x}px`;
       el.style.top = `${c.y}px`;
-      // cards lean with the rail; the tangent at 2021 is steep and at 2026
-      // almost flat, which is exactly the lean the reference has
-      const tilt = portrait ? 0 : (L.angles[i] - L.angles[L.angles.length - 1]) * 14;
+      const tilt = portrait ? 0 : (L.angles[i] - L.angles[L.angles.length - 1]) * 10;
       el.style.setProperty('--tilt', `${tilt.toFixed(2)}deg`);
       el.style.setProperty('--depth', String(i));
 
       const n = L.nodes[i];
       labels[i].style.left = `${n[0]}px`;
       labels[i].style.top = `${n[1]}px`;
-      labels[i].style.fontSize = `${Math.max(19, c.w * 0.30)}px`;
+      labels[i].style.fontSize = `${Math.max(16, c.w * 0.25)}px`;
     }
     section.classList.toggle('is-portrait', portrait);
   }

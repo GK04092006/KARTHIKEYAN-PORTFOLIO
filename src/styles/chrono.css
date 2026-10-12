@@ -18,7 +18,7 @@
   --cream: #f4e9dc;
 
   position: relative;
-  height: 240svh;              /* travel for the intro to breathe into */
+  height: 150svh;
   background: #060505;
 }
 
@@ -37,9 +37,6 @@
   display: block;
 }
 
-/* The figure's own canvas, stacked OVER the card deck: he stands in front of
-   the timeline with the cards passing behind his shoulders. Transparent, and
-   inert to the pointer so the cards underneath stay hoverable and clickable. */
 #chronoFront {
   position: absolute;
   inset: 0;
@@ -75,7 +72,7 @@
 
 .chrono__title {
   left: clamp(18px, 3vw, 54px);
-  top: clamp(26px, 5.5vh, 62px);
+  top: clamp(74px, 9.5vh, 100px);
   display: grid;
   gap: .18em;
   font-family: 'Bodoni Moda', 'Times New Roman', serif;
@@ -89,7 +86,7 @@
 
 .chrono__rail {
   left: clamp(18px, 3vw, 54px);
-  top: clamp(150px, 24vh, 240px);
+  top: clamp(195px, 28vh, 275px);
   display: grid;
   gap: .95em;
   font-family: var(--ui);
@@ -112,7 +109,7 @@
 
 .chrono__hint {
   right: clamp(18px, 3vw, 54px);
-  top: clamp(26px, 5.5vh, 62px);
+  top: clamp(128px, 16vh, 164px);
   text-align: right;
   font-family: var(--ui);
   font-size: clamp(7.5px, .62vw, 9.5px);
@@ -369,8 +366,8 @@
    -------------------------------------------------------------------------- */
 .chrono__action-wrap {
   position: absolute;
-  top: clamp(20px, 3.8vh, 42px);
-  right: clamp(20px, 3.5vw, 60px);
+  top: clamp(74px, 9.5vh, 98px);
+  right: clamp(18px, 3vw, 54px);
   z-index: 40;
 }
 

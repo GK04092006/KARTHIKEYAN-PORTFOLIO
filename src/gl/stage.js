@@ -133,11 +133,6 @@ export class Stage {
       this._quad(p, [0, 0, W, H]);
     }
 
-    // he is the nearest thing to camera, so under the pointer he travels
-    // further than the wordmark behind him
-    const heroSkew = [px * 30 * dpr, py * 18 * dpr];
-    const geo = this._heroGeometry(clips.hero, state.hero);
-
     // ---- 2 letters ------------------------------------------------------
     {
       const p = this.progs.letter;
@@ -146,7 +141,7 @@ export class Stage {
       gl.uniform1i(p.u.uGrunge, bind(gl, this.tex.grunge, 1));
       gl.uniform3f(p.u.uInk, INK[0], INK[1], INK[2]);
       // the distressed surface is sampled in SCREEN space so it reads as one
-      // continuous worn sheet across all seven letters, not seven tiles
+      // continuous worn sheet across all letters, not separate tiles
       gl.uniform2f(p.u.uGrungeScale, aspect * this.wearScale, this.wearScale);
       gl.uniform2f(p.u.uGrungeOffset, 0.12, 0.31);
       gl.uniform1f(p.u.uWear, this.wear);
@@ -166,10 +161,6 @@ export class Stage {
           [px * 14 * dpr, lift + py * 9 * dpr]);
       }
     }
-
-    // ---- 3 + 4 the walking man, in front of the wordmark ----------------
-    this._heroShadow(geo, state.hero, heroSkew);
-    this._heroFigure(clips.hero, geo, state.hero, heroSkew);
 
     // ---- 5 post ---------------------------------------------------------
     {

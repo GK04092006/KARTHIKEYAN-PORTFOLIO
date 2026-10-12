@@ -19,19 +19,19 @@ import {
 } from '../lib/ease.js';
 
 export const T = {
-  heroIn: 0.30,
-  heroInDur: 2.05,
-  letters: 2.10,
-  letterStagger: 0.145,
-  letterDur: 1.65,
-  ember: 2.45,
-  welcome: 2.90,
-  artist: 3.18,
-  legend: 3.32,
-  arrows: 3.46,
-  dots: 3.62,
-  header: 4.45,
-  settled: 6.25,
+  heroIn: 0.05,
+  heroInDur: 0.90,
+  letters: 0.12,
+  letterStagger: 0.085,
+  letterDur: 1.05,
+  ember: 0.20,
+  welcome: 0.45,
+  artist: 0.65,
+  legend: 0.75,
+  arrows: 0.85,
+  dots: 0.95,
+  header: 0.25,
+  settled: 1.65,
 };
 
 /** Reveal order: centre outward, so the wordmark grows around the figure. */

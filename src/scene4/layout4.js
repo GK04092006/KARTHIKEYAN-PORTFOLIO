@@ -10,16 +10,16 @@
 export const FRAME = [1600, 900];
 
 export const CARDS = [
-  { id: 'p01_careloop', title: 'CareLoop', box: [72, 105, 390, 250], depth: 0.45, tint: [0.40, 0.12, 0.12] },
-  { id: 'p02_weather', title: 'Weather App', box: [560, 70, 420, 260], depth: 0.60, tint: [0.16, 0.30, 0.45] },
-  { id: 'p03_fitness', title: 'Fitness', box: [1110, 105, 390, 250], depth: 0.45, tint: [0.20, 0.36, 0.24] },
-  { id: 'p04_course', title: 'Course Outcome Analyzer', box: [90, 475, 390, 240], depth: 0.25, tint: [0.34, 0.20, 0.40] },
-  { id: 'p05_zoo', title: 'Zoo Management', box: [590, 485, 360, 230], depth: 0.90, tint: [0.34, 0.27, 0.12] },
-  { id: 'p06_crop', title: 'Smart Crop Advisory', box: [1080, 470, 410, 250], depth: 0.25, tint: [0.15, 0.36, 0.20] },
+  { id: 'p01_careloop', title: 'AI-Powered Industrial Digital Twin & Risk Platform', targetId: 'proj-digital-twin', box: [65, 95, 370, 232], depth: 0.40, tint: [0.85, 0.16, 0.16] },
+  { id: 'p02_weather', title: 'Smart Crop Advisory System', targetId: 'proj-smart-crop', box: [610, 52, 380, 238], depth: 0.55, tint: [0.16, 0.72, 0.42] },
+  { id: 'p03_fitness', title: 'Real-Time Weather Information Application', targetId: 'proj-weather-app', box: [1155, 95, 370, 232], depth: 0.40, tint: [0.20, 0.52, 0.90] },
+  { id: 'p04_course', title: 'AI-Based Flood Risk Prediction System', targetId: 'proj-flood-risk', box: [65, 420, 370, 232], depth: 0.25, tint: [0.65, 0.30, 0.90] },
+  { id: 'p05_zoo', title: 'Emergency Route Optimization using A*', targetId: 'proj-route-astar', box: [465, 565, 315, 198], depth: 0.75, tint: [0.90, 0.55, 0.15] },
+  { id: 'p06_crop', title: 'Student & Online Task Management Systems', targetId: 'proj-mini-systems', box: [1155, 420, 370, 232], depth: 0.25, tint: [0.18, 0.75, 0.75] },
 ];
 
-// the central figure: crop box in frame px (his lighting is baked in)
-export const PERSON = { x: 690, y: 300, w: 220, h: 390 };
+// the central figure: crop box in frame px (positioned cleanly in center)
+export const PERSON = { x: 695, y: 305, w: 210, h: 375 };
 
 // the floor's lit ellipses (centre x, centre y, rx, ry) and the overhead ring,
 // used by the live glints the canvas draws over the baked plate

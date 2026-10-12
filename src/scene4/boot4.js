@@ -44,16 +44,7 @@ export async function initGallery() {
   const rank = [];
   order.forEach((ci, k) => { rank[ci] = k; });
 
-  const PROJECT_URLS = [
-  'https://github.com/GK04092006/careloop',
-  'https://github.com/GK04092006/weatherapp',
-  'https://github.com/GK04092006/fitness',
-  'https://github.com/GK04092006/course-outcome-Analyzer',
-  'https://github.com/GK04092006/ZOO-MANAGEMENT',
-  'https://github.com/GK04092006/Smart-Crop-Advisory-System',
-];
-
-const cards = CARDS.map((c, i) => {
+  const cards = CARDS.map((c, i) => {
     const el = document.createElement('button');
     el.type = 'button';
     el.className = 'g-card';
@@ -64,11 +55,16 @@ const cards = CARDS.map((c, i) => {
     el.style.zIndex = String(10 + Math.round((1 - c.depth) * 20));
     el.style.setProperty('--i', String(i));   // float dephasing
     el.innerHTML = `<span class="g-card__in">`
-      + `<img src="public/projects/${c.id}.png?v=9" alt="${c.title}" `
+      + `<img src="public/projects/${c.id}.png?v=12" alt="${c.title}" `
       + `draggable="false" loading="eager" decoding="async"></span>`;
-    el.title = `Open ${c.title} on GitHub`;
+    el.title = `View ${c.title} details`;
     el.addEventListener('click', () => {
-      window.open(PROJECT_URLS[i], '_blank', 'noopener,noreferrer');
+      const targetEl = c.targetId ? document.getElementById(c.targetId) : document.getElementById('projectsShowcase');
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetEl.classList.add('is-highlighted');
+        setTimeout(() => targetEl.classList.remove('is-highlighted'), 2200);
+      }
     });
     deck.appendChild(el);
     return el;

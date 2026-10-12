@@ -12,8 +12,8 @@
 
 const TEXT = 'KARTHIKEYAN';
 
-// measured from the hero artwork: ink width / cap height
-export const TARGET_RATIO = 4.904;
+// measured for 11-character KARTHIKEYAN: ink width / cap height
+export const TARGET_RATIO = 5.45;
 
 function ctx2d(w, h) {
   const c = document.createElement('canvas');

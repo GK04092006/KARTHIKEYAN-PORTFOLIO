@@ -8,10 +8,26 @@ no-store here, and the few types that matter get explicit content types.
 import base64
 import http.server
 import os
+import socket
 import socketserver
 import sys
 
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 5173
+def find_available_port(start_port=5173):
+    port = start_port
+    while port < start_port + 100:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("0.0.0.0", port))
+                return port
+            except OSError:
+                port += 1
+    return start_port
+
+REQUESTED_PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 5173
+PORT = find_available_port(REQUESTED_PORT)
+if PORT != REQUESTED_PORT:
+    print("Port %d is in use; using port %d instead." % (REQUESTED_PORT, PORT), flush=True)
+
 SHOT_DIR = os.environ.get("SHOT_DIR", "shots")
 
 TYPES = {
@@ -24,6 +40,7 @@ TYPES = {
     ".woff2": "font/woff2",
     ".png": "image/png",
     ".jpg": "image/jpeg",
+    ".svg": "image/svg+xml",
 }
 
 
@@ -76,5 +93,5 @@ class Server(socketserver.ThreadingTCPServer):
 
 if __name__ == "__main__":
     with Server(("127.0.0.1", PORT), Handler) as httpd:
-        print("serving on http://127.0.0.1:%d" % PORT, flush=True)
+        print("Serving at http://localhost:%d and http://127.0.0.1:%d" % (PORT, PORT), flush=True)
         httpd.serve_forever()

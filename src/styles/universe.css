@@ -53,77 +53,62 @@
    -------------------------------------------------------------------------- */
 
 .universe__title {
-  position: absolute;
-  top: clamp(26px, 6.5vh, 66px);
-  left: 50%;
-  transform: translate(-50%, 14px);
-  z-index: 2;
+  position: relative;
+  z-index: 3;
+  max-width: 960px;
+  margin: 0 auto 36px;
+  padding: clamp(88px, 12vh, 128px) 20px 0;
   text-align: center;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 0;
-  transition: opacity 1.3s var(--ease-out) 0.75s,
-              transform 1.6s var(--ease-out) 0.75s;
+  transform: translateY(14px);
+  transition: opacity 0.9s var(--ease-out) 0.15s,
+              transform 1.1s var(--ease-out) 0.15s;
 }
-.universe.is-on .universe__title { opacity: 1; transform: translate(-50%, 0); }
+.universe.is-on .universe__title { opacity: 1; transform: translateY(0); }
 
 .universe__over {
-  margin: 0 0 0.9em;
+  margin: 0 0 0.8em;
   font-family: var(--ui);
-  font-size: clamp(7.5px, 0.62vw, 9.5px);
-  font-weight: 500;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;        /* recentre what the tracking pushes right */
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
   text-transform: uppercase;
-  color: #b98a6a;
+  color: #ff3b30;
 }
 .universe__name {
   margin: 0;
   font-family: 'Bodoni Moda', 'Times New Roman', serif;
   font-weight: 400;
-  font-size: clamp(20px, 2.3vw, 36px);
-  line-height: 1.22;
-  letter-spacing: 0.26em;
-  text-indent: 0.26em;
+  font-size: clamp(26px, 3.2vw, 48px);
+  line-height: 1.18;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
   text-transform: uppercase;
   color: #f2e8dc;
-  text-shadow: 0 0 0.6em rgba(0, 0, 0, 0.9), 0 0 2em rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 0.6em rgba(0, 0, 0, 0.9), 0 0 2em rgba(255, 30, 30, 0.25);
 }
 .universe__sub {
-  margin: 1.1em 0 0;
+  margin: 1.1em auto 0;
+  max-width: 780px;
   font-family: var(--ui);
-  font-size: clamp(7.5px, 0.6vw, 9.5px);
+  font-size: clamp(10px, 0.82vw, 12.5px);
   font-weight: 400;
-  letter-spacing: 0.42em;
-  text-indent: 0.42em;
+  letter-spacing: 0.28em;
+  line-height: 1.7;
   text-transform: uppercase;
-  color: rgba(222, 200, 180, 0.55);
+  color: rgba(235, 215, 200, 0.72);
 }
 
 @media (max-width: 760px) {
-  .universe__name { letter-spacing: 0.18em; text-indent: 0.18em; }
-}
-
-/* breathes to black across the film's loop point so the cut is never seen,
-   and doubles as the entrance veil */
-.universe__veil {
-  position: absolute;
-  inset: 0;
-  background: #000;
-  opacity: 1;
-  pointer-events: none;
-  transition: opacity 0.45s ease;
-}
-
-.universe.is-fallback::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #000 url('../../public/media/universe.jpg') center / cover no-repeat;
+  .universe__name { letter-spacing: 0.14em; text-indent: 0.14em; }
+  .universe__sub { letter-spacing: 0.16em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #uniFilm, .universe__title { transition-duration: 0.01ms; transition-delay: 0s; transform: none; }
-  .universe.is-on .universe__title { transform: translate(-50%, 0); }
+  .universe__title { transition-duration: 0.01ms; transition-delay: 0s; transform: none; }
+  .universe.is-on .universe__title { transform: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -132,14 +117,18 @@
 .universe {
   height: auto;
   min-height: 100svh;
-  padding-bottom: 90px;
+  padding-bottom: 100px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 25, 25, 0.14), transparent 48%),
+    linear-gradient(180deg, #030101 0%, #090202 50%, #050202 100%);
+  border-top: 1px solid rgba(255, 40, 40, 0.22);
 }
 
 .universe__hero-stage {
   position: relative;
   z-index: 2;
   width: min(1180px, 94vw);
-  margin: clamp(120px, 16vh, 160px) auto 40px;
+  margin: 0 auto 46px;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 40, 40, 0.38);
@@ -273,4 +262,23 @@
   border-radius: 2px;
   box-shadow: 0 0 8px rgba(255, 40, 40, 0.6);
 }
+
+.tech-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.tech-card__tag {
+  padding: 2px 7px;
+  font-family: var(--ui);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: #d8d0c8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+
 

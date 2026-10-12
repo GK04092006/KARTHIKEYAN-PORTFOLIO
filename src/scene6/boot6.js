@@ -40,28 +40,7 @@ export async function initFinale() {
   const stage1 = document.getElementById('finStage1');
   const dim = document.getElementById('finDim');
   const frame2 = document.getElementById('finFrame2');
-  const frame2Img = document.getElementById('finFrame2Img');
-  let frame2Ready = false;
-  if (frame2 && frame2Img) {
-    // canonical home first, then the naming pattern the reference images
-    // use; while the image is absent each miss logs one benign 404
-    const candidates = [
-      'public/fin/frame2.jpg',
-      'footer%202nd%20image.jpg',
-      'Footer%20image%202.jpg',
-    ];
-    (function tryNext(i) {
-      if (i >= candidates.length) return;
-      const probe = new Image();
-      probe.onload = () => {
-        frame2Img.src = candidates[i];
-        frame2.hidden = false;
-        frame2Ready = true;
-      };
-      probe.onerror = () => tryNext(i + 1);
-      probe.src = candidates[i];
-    })(0);
-  }
+  const frame2Ready = false;
   const sstep = (v) => v * v * v * (v * (v * 6 - 15) + 10);   // smootherstep
   let p2 = 0;                                    // damped frame-2 progress
 

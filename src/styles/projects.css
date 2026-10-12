@@ -9,16 +9,20 @@
 
 .gallery {
   position: relative;
-  height: 260svh;
-  background: #000;
+  height: auto;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 25, 25, 0.12), transparent 55%),
+    linear-gradient(180deg, #000000 0%, #080202 45%, #040101 100%);
+  padding-bottom: 100px;
 }
 
 .gallery__pin {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100svh;
   overflow: hidden;
   background: #000;
+  border-bottom: 1px solid rgba(255, 40, 40, 0.24);
 }
 
 #galleryStage {
@@ -45,9 +49,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Cards. The sprite carries the reference's own bezel, rim light and glow,
-   so the button is chrome-free: no border, no background — just the pixels,
-   an easing inner shell for hover/float, and a tinted shadow when lifted.
+   Cards.
    -------------------------------------------------------------------------- */
 
 .g-card {
@@ -80,8 +82,6 @@
   user-select: none;
 }
 
-/* hover: toward the camera, a touch brighter, its glow deepened — and the
-   rest of the room eases back a breath so the depth reads */
 .g-card:hover .g-card__in,
 .g-card:focus-visible .g-card__in {
   transform: translateZ(30px) scale(1.022);
@@ -110,8 +110,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Corner captions — the reference's HUD. Letterspaced hairline sans, amber
-   headline, dashes as punctuation. They type themselves in on .is-labels.
+   Corner captions — aligned below fixed header with zero overlap.
    -------------------------------------------------------------------------- */
 
 .g-label {
@@ -133,12 +132,12 @@
 .gallery.is-labels .g-label { opacity: 1; transform: none; }
 
 .g-label--projects {
-  top: clamp(18px, 3.8vh, 40px);
+  top: clamp(74px, 9.5vh, 98px);
   left: clamp(20px, 3vw, 52px);
-  font-size: clamp(10px, 0.92vw, 15px);
-  font-weight: 500;
-  letter-spacing: 0.52em;
-  color: #d8b183;
+  font-size: clamp(11px, 0.95vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.48em;
+  color: #ff4d4d;
 }
 .g-label--projects::after,
 .g-label--ideas::after,
@@ -153,24 +152,29 @@
   opacity: 0.55;
 }
 .g-label--ideas {
-  top: clamp(90px, 15.5vh, 150px);
+  top: clamp(132px, 17vh, 175px);
   left: clamp(20px, 3vw, 52px);
 }
 .g-label--ideas b { font-weight: 500; color: rgba(232, 226, 220, 0.82); }
 .g-label--scroll {
-  top: clamp(18px, 4vh, 42px);
+  top: clamp(132px, 17vh, 175px);
   right: clamp(20px, 3vw, 52px);
+  text-align: right;
+}
+.g-label--scroll::after,
+.g-label--tomorrow::after {
+  margin-left: auto;
 }
 .g-label--real {
-  bottom: clamp(20px, 6vh, 60px);
+  bottom: clamp(20px, 5vh, 52px);
   left: clamp(20px, 3vw, 52px);
 }
 .g-label--tomorrow {
-  bottom: clamp(20px, 6vh, 60px);
+  bottom: clamp(20px, 5vh, 52px);
   right: clamp(20px, 3vw, 52px);
+  text-align: right;
 }
 
-/* the red index over the hero screen — placed by boot4 from frame coords */
 .g-label--num {
   font-family: var(--ui);
   font-weight: 500;
@@ -180,24 +184,19 @@
 }
 
 /* --------------------------------------------------------------------------
-   Portrait: recomposition (layout4.PORTRAIT places the survivors); the rest
-   of the deck sits this orientation out. Captions tighten into two rows.
+   Portrait
    -------------------------------------------------------------------------- */
 
 .gallery.is-portrait .g-label--projects {
-  top: clamp(14px, 2.5vh, 28px);
+  top: clamp(68px, 8.5vh, 88px);
   left: clamp(16px, 4vw, 32px);
   font-size: clamp(9px, 2.4vw, 13px);
 }
 .gallery.is-portrait .g-label--ideas {
-  top: clamp(52px, 7.5vh, 85px);
-  left: clamp(16px, 4vw, 32px);
-  font-size: clamp(7.5px, 2vw, 10px);
+  display: none;
 }
 .gallery.is-portrait .g-label--scroll {
-  top: clamp(14px, 2.5vh, 28px);
-  right: clamp(16px, 4vw, 32px);
-  font-size: clamp(7.5px, 2vw, 10px);
+  display: none;
 }
 .gallery.is-portrait .g-label--real {
   bottom: clamp(14px, 2.5vh, 28px);
@@ -229,12 +228,12 @@
 }
 
 /* --------------------------------------------------------------------------
-   Project Dossiers Action & Modal
+   Project Dossiers Action & Showcase Grid
    -------------------------------------------------------------------------- */
 .gallery__action-wrap {
   position: absolute;
-  top: clamp(20px, 3.8vh, 42px);
-  right: clamp(20px, 3.5vw, 60px);
+  top: clamp(74px, 9.5vh, 98px);
+  right: clamp(20px, 3vw, 52px);
   z-index: 40;
 }
 
@@ -243,8 +242,8 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(20, 4, 4, 0.75);
-  border: 1px solid rgba(255, 40, 40, 0.45);
+  background: rgba(20, 4, 4, 0.78);
+  border: 1px solid rgba(255, 40, 40, 0.48);
   border-radius: 4px;
   color: #f0e6dc;
   font-family: var(--ui);
@@ -263,6 +262,251 @@
   box-shadow: 0 0 20px rgba(255, 30, 30, 0.5);
   color: #fff;
   transform: translateY(-2px);
+}
+
+/* Full Resume Projects Showcase Container */
+.projects-showcase {
+  position: relative;
+  z-index: 5;
+  width: min(1220px, 94vw);
+  margin: 0 auto;
+  padding-top: clamp(64px, 9vh, 96px);
+}
+
+.projects-showcase__head {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 38px;
+}
+
+.projects-showcase__eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--ui);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #ff3333;
+}
+
+.projects-showcase__title {
+  margin: 0 0 14px;
+  font-family: var(--disp);
+  font-size: clamp(34px, 5vw, 68px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  line-height: 1.05;
+}
+
+.projects-showcase__title span {
+  color: #ff2a2b;
+}
+
+.projects-showcase__sub {
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.65;
+  color: #a8a29e;
+}
+
+.proj-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 38px;
+}
+
+.proj-filter-btn {
+  padding: 9px 18px;
+  font-family: var(--ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.proj-filter-btn:hover,
+.proj-filter-btn.is-active {
+  color: #fff;
+  background: rgba(255, 30, 30, 0.24);
+  border-color: #ff2222;
+  box-shadow: 0 0 18px rgba(255, 30, 30, 0.45);
+}
+
+.proj-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.proj-showcase-card {
+  position: relative;
+  padding: clamp(22px, 2.6vw, 30px);
+  border-radius: 10px;
+  background: linear-gradient(155deg, rgba(255, 18, 18, 0.09), rgba(10, 6, 6, 0.95));
+  border: 1px solid rgba(255, 45, 45, 0.26);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.35s var(--ease-out), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.proj-showcase-card--flagship {
+  grid-column: 1 / -1;
+  background: linear-gradient(145deg, rgba(255, 28, 28, 0.15), rgba(12, 4, 4, 0.96));
+  border-color: rgba(255, 55, 55, 0.48);
+}
+
+.proj-showcase-card:hover,
+.proj-showcase-card.is-highlighted {
+  transform: translateY(-5px);
+  border-color: #ff2b2b;
+  box-shadow: 0 18px 50px rgba(255, 20, 20, 0.24), 0 0 28px rgba(255, 30, 30, 0.18);
+}
+
+.proj-showcase-card__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.proj-showcase-card__num {
+  font-family: var(--ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ff4444;
+}
+
+.proj-showcase-card__badge {
+  font-family: var(--ui);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffb4a8;
+  padding: 4px 10px;
+  background: rgba(255, 40, 40, 0.16);
+  border: 1px solid rgba(255, 60, 60, 0.36);
+  border-radius: 4px;
+}
+
+.proj-showcase-card__title {
+  margin: 0;
+  font-family: var(--ui);
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.proj-showcase-card__bullets {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 7px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #c9c3be;
+}
+
+.proj-showcase-card--flagship .proj-showcase-card__bullets {
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 28px;
+}
+
+.proj-showcase-card__bullets li::marker {
+  color: #ff3b30;
+}
+
+.proj-showcase-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.proj-showcase-tag {
+  padding: 4px 10px;
+  font-family: var(--ui);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f0e6dc;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.proj-showcase-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.proj-showcase-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-family: var(--ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: #de1b1c;
+  border: 1px solid #ff3b30;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.proj-showcase-link:hover {
+  background: #ff2a2b;
+  box-shadow: 0 0 18px rgba(255, 42, 43, 0.55);
+}
+
+.proj-showcase-link--sec {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e5ddd5;
+}
+
+.proj-showcase-link--sec:hover {
+  background: rgba(255, 35, 35, 0.2);
+  border-color: #ff3b30;
+  color: #fff;
+}
+
+@media (max-width: 920px) {
+  .proj-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .proj-showcase-card--flagship .proj-showcase-card__bullets {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Common Modal Styles */
